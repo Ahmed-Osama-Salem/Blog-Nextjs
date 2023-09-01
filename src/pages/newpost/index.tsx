@@ -73,7 +73,6 @@ const Index = () => {
   }
 
   if (mutation.isSuccess) {
-    // console.log(mutation.variables);
     return <PostCreated mutation={mutation} />;
   }
 
