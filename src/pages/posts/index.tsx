@@ -3,13 +3,13 @@
 import { Spinner, Stack } from '@chakra-ui/react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
+import { getPosts } from '@/apps/server/handleFetchPosts';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
 import ListPostsPage from '@/component/sections/ListPostsPage';
 import { Main } from '@/component/templates/Main';
 
 import type { PostProps } from '..';
-import { getPosts } from '..';
 
 const Index = () => {
   const {

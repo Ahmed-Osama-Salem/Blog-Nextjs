@@ -13,6 +13,7 @@ import { useMutation, useQueryClient } from 'react-query';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as Yup from 'yup';
 
+import { createNewPost } from '@/apps/server/handleFetchPosts';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
 import { Main } from '@/component/templates/Main';
@@ -22,25 +23,7 @@ const Index = () => {
   const queryClient = useQueryClient();
 
   const createPost = async (postData: typeof initialValues) => {
-    try {
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/posts',
-        {
-          method: 'POST',
-          body: JSON.stringify(postData),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-      );
-      const data = await response.json();
-      // Assuming the API returns the created post data
-      console.log('Created post:', data);
-      return data;
-    } catch (error) {
-      console.error('Error creating post:', error);
-      return error;
-    }
+    await createNewPost(postData);
   };
 
   const mutation = useMutation(createPost, {
@@ -48,6 +31,8 @@ const Index = () => {
       queryClient.invalidateQueries('posts');
     },
   });
+
+  console.log(mutation);
 
   const validationSchema = Yup.object().shape({
     blogTitle: Yup.string()

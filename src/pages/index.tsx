@@ -3,9 +3,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 
 import { Spinner, Stack } from '@chakra-ui/react';
-import axios from 'axios';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
+import { getPosts } from '@/apps/server/handleFetchPosts';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
 import HomePage from '@/component/sections/HomePage';
@@ -17,13 +17,6 @@ export interface PostProps {
   title: string;
   body: string;
 }
-
-export const getPosts = async () => {
-  const postsList = await axios.get(
-    'https://jsonplaceholder.typicode.com/posts'
-  );
-  return postsList.data;
-};
 
 const Index = () => {
   const {

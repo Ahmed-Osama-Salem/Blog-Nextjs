@@ -1,28 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { Spinner, Stack } from '@chakra-ui/react';
-import axios from 'axios';
 import type { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
+import fetchComments from '@/apps/server/handleFetchComments';
+import { fetchPost } from '@/apps/server/handleFetchPosts';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
 import SinglePostPage from '@/component/sections/SinglePostPage';
 import { Main } from '@/component/templates/Main';
-
-const fetchPost = async (id: string) => {
-  const res = await axios.get(
-    `https://jsonplaceholder.typicode.com/posts/${id}`
-  );
-  return res.data;
-};
-
-const fetchComments = async (id: string) => {
-  const res = await axios.get(
-    `https://jsonplaceholder.typicode.com/posts/${id}/comments`
-  );
-  return res.data;
-};
 
 const Posts = () => {
   const router = useRouter();
