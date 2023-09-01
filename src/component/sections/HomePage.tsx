@@ -18,7 +18,7 @@ const HomePage = ({ posts }: { posts: PostProps[] }) => {
           as="h1"
           fontSize={{ base: '6xl', md: '8xl', lg: '200px' }}
           fontWeight="bold"
-          color="black"
+          // color="black"
         >
           {text.split('').map((char, index) => (
             <motion.span

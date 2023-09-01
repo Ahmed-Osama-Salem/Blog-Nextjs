@@ -1,6 +1,8 @@
 import { Button, Flex, Heading, Link } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
+import ToggleColorMode from '../elements/ToggleColorMode';
+
 const Navbar = () => {
   const router = useRouter();
 
@@ -33,6 +35,7 @@ const Navbar = () => {
             New post
           </Button>
         </Link>
+        <ToggleColorMode />
       </Flex>
     </Flex>
   );

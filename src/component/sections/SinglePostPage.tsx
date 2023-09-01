@@ -19,22 +19,30 @@ const SinglePostPage = ({ posts, comments }: { posts: any; comments: any }) => {
       <Grid
         h="full"
         templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(6, 1fr)"
+        templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(6, 1fr)' }}
         gap={2}
       >
-        <GridItem rowSpan={3} colSpan={2} bg="white" py="90px">
+        <GridItem
+          rowSpan={3}
+          colSpan={{ base: 2, md: 2 }}
+          py={{ base: 4, md: 90 }}
+        >
           <Stack spacing="24" py="4">
             {[1, 2].map((el) => {
               return <PostCard key={el} post={posts} />;
             })}
           </Stack>
         </GridItem>
-        <GridItem colSpan={4} rowSpan={2} bg="white">
+        <GridItem colSpan={{ base: 2, md: 4 }} rowSpan={2}>
           <Stack mt="6" spacing="3" py="4">
             <Text color="purple.500" fontWeight="bold" fontSize="md">
-              Sunday , 1 Jan 2023
+              Sunday, 1 Jan 2023
             </Text>
-            <Heading size="md" color="black" fontWeight="bold" fontSize="4xl">
+            <Heading
+              size="md"
+              fontWeight="bold"
+              fontSize={{ base: '2xl', md: '4xl' }}
+            >
               {posts.title}
             </Heading>
           </Stack>
@@ -42,8 +50,8 @@ const SinglePostPage = ({ posts, comments }: { posts: any; comments: any }) => {
             src="https://picsum.photos/426"
             alt="Green double couch with wooden legs"
             w="full"
-            h="426px"
-            className="object-cover"
+            h={{ base: 'auto', md: '426px' }}
+            objectFit="cover"
           />
           <Stack mt="6" spacing="3" py="4">
             <Text color="gray.400" fontWeight="normal" fontSize="md">
@@ -76,8 +84,8 @@ const SinglePostPage = ({ posts, comments }: { posts: any; comments: any }) => {
           </Stack>
         </GridItem>
       </Grid>
-      <Stack className="bg-[#F8FAFB]" p="16" spacing="10">
-        <Text color="black" fontWeight="bold" fontSize="xl" mb="2">
+      <Stack p={{ base: 4, md: 16 }} spacing="10">
+        <Text fontWeight="bold" fontSize="xl" mb="2">
           {`${comments.length} Comments`}
         </Text>
         {comments.map((el: any) => {

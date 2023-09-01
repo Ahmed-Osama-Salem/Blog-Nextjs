@@ -8,12 +8,12 @@ import ListPostCard from '../modules/ListPostCard';
 const ListPostsPage = ({ posts }: { posts: PostProps[] }) => {
   return (
     <>
-      <Heading as="h2" fontSize="2xl" fontWeight="semibold">
+      <Heading as="h2" fontSize="2xl" fontWeight="semibold" mb="7">
         All blog posts
       </Heading>
       <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={4}>
         {posts &&
-          posts.slice(0, 10).map((post: PostProps) => (
+          posts.map((post: PostProps) => (
             <div key={post.id} className="mb-3">
               <Link href={`/posts/${post.id}`}>
                 <ListPostCard
