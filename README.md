@@ -38,7 +38,7 @@ Follow these steps to set up and run the project locally:
 
 2. **Navigate to the project directory:**
    ```bash
-   cd BlogOwn
+   cd Blog-Nextjs
 
 3. **Install project dependencies:**
    ```bash
