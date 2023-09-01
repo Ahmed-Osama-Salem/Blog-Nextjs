@@ -6,6 +6,7 @@ import {
   Heading,
   Input,
   Stack,
+  Textarea,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { useMutation, useQueryClient } from 'react-query';
@@ -74,7 +75,7 @@ const Index = () => {
                     isInvalid={form.errors.blogBody && form.touched.blogBody}
                   >
                     <FormLabel>Blog Body</FormLabel>
-                    <Input {...field} placeholder="Blog Body" />
+                    <Textarea {...field} placeholder="Blog Body" />
                     <FormErrorMessage>{form.errors.blogBody}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -84,6 +85,9 @@ const Index = () => {
                 colorScheme="teal"
                 isLoading={mutation.isLoading}
                 type="submit"
+                color="white"
+                variant="solid"
+                style={{ backgroundColor: 'purple' }}
               >
                 Submit
               </Button>

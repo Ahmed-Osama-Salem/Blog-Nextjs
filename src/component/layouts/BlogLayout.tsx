@@ -9,7 +9,7 @@ interface BlogLayoutProps {
 
 const BlogLayout = (props: BlogLayoutProps) => {
   return (
-    <Flex direction="column" alignItems="center" w="100%" px="10">
+    <Flex direction="column" alignItems="center" w="100%" px="10" pb="10">
       <Box maxW="1280px" w="100%">
         <Navbar />
         {props.children}
