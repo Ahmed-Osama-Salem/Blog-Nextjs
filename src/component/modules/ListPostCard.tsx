@@ -1,4 +1,13 @@
-import { Badge, Stack } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import React from 'react';
 
 interface PostCardProps {
@@ -8,42 +17,51 @@ interface PostCardProps {
   brif: string;
   date: string;
 }
+
 const ListPostCard = (props: PostCardProps) => {
   const { author, brif, image, title, date } = props;
+
   return (
-    <div className="flex h-full w-full flex-col gap-8  ">
-      <div className="h-1/2  w-full">
-        <img
-          // src="/assets/images/Image.png"
+    <Box display="flex" flexDirection="column" gap={8}>
+      <Box flex="1" width="100%">
+        <Image
           src={image}
-          className="h-full w-full object-cover"
           alt=""
+          objectFit="cover"
+          width="100%"
+          height="100%"
         />
-      </div>
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-3">
-          <h2 className="text-sm font-semibold text-[#6941C6]">
+      </Box>
+      <VStack spacing={6}>
+        <Flex direction="column" alignItems="flex-start">
+          <Text fontSize="sm" fontWeight="semibold" color="#6941C6">
             {author} • {date}
-          </h2>
-          <h2 className="text-2xl font-semibold ">{title}</h2>
-          <h2 className="text-sm font-semibold text-[#21D188]">author</h2>
-          <p className="text-base font-normal text-[#667085] ">{brif}</p>
-        </div>
-        <div>
-          <Stack direction="row">
-            <Badge colorScheme="green" className="rounded-full p-1 px-2">
+          </Text>
+          <Heading as="h2" fontSize="2xl" fontWeight="semibold">
+            {title}
+          </Heading>
+          <Text fontSize="sm" fontWeight="semibold" color="#21D188">
+            {author}
+          </Text>
+          <Text fontSize="base" fontWeight="normal" color="#667085">
+            {brif}
+          </Text>
+        </Flex>
+        <Flex>
+          <Stack direction="row" spacing={2}>
+            <Badge colorScheme="green" rounded="full" p={1} px={2}>
               Presentation
             </Badge>
-            <Badge colorScheme="red" className="rounded-full p-1 px-2">
+            <Badge colorScheme="red" rounded="full" p={1} px={2}>
               Research
             </Badge>
-            <Badge colorScheme="purple" className="rounded-full p-1 px-2">
+            <Badge colorScheme="purple" rounded="full" p={1} px={2}>
               Design
             </Badge>
           </Stack>
-        </div>
-      </div>
-    </div>
+        </Flex>
+      </VStack>
+    </Box>
   );
 };
 

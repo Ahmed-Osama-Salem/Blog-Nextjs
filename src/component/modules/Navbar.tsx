@@ -1,16 +1,31 @@
-import { Link } from '@chakra-ui/next-js';
-import { Button, Heading } from '@chakra-ui/react';
-// import Link from 'next/link';
+import { Button, Flex, Heading, Link } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
+  const router = useRouter();
+
   return (
-    <nav className="flex w-full items-center justify-between py-8">
-      <Heading size="md">Ahmed osama Blog</Heading>
-      <div className="flex items-center gap-4">
-        <Link href="/" color="main.900" _hover={{ color: 'blue.500' }}>
+    <Flex
+      direction={{ base: 'column', md: 'row' }}
+      align="center"
+      justify="space-between"
+      py={8}
+      px={{ base: 4, md: 0 }}
+    >
+      <Heading size="md">Ahmed Osama Blog</Heading>
+      <Flex gap={4} mt={{ base: 4, md: 0 }} align="center">
+        <Link
+          href="/"
+          color={router.pathname === '/' ? 'blue.500' : 'main.900'}
+          _hover={{ color: 'blue.500' }}
+        >
           Home
         </Link>
-        <Link href="/posts" color="main.900" _hover={{ color: 'blue.500' }}>
+        <Link
+          href="/posts"
+          color={router.pathname === '/posts' ? 'blue.500' : 'main.900'}
+          _hover={{ color: 'blue.500' }}
+        >
           Blog
         </Link>
         <Link href="/newpost">
@@ -18,8 +33,8 @@ const Navbar = () => {
             New post
           </Button>
         </Link>
-      </div>
-    </nav>
+      </Flex>
+    </Flex>
   );
 };
 

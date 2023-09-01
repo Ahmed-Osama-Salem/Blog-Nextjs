@@ -1,4 +1,4 @@
-import { Badge, Stack } from '@chakra-ui/react';
+import { Badge, Box, Flex, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 
 interface SecondPostCardProps {
@@ -8,42 +8,43 @@ interface SecondPostCardProps {
   brif: string;
   date: string;
 }
+
 const SecondPostCard = (props: SecondPostCardProps) => {
   const { author, brif, image, title, date } = props;
+
   return (
-    <div className="flex h-full w-full  gap-8  ">
-      <div className="h-full  w-1/2">
-        <img
-          // src="/assets/images/Image.png"
-          src={image}
-          className="h-full w-full object-cover"
-          alt=""
-        />
-      </div>
-      <div className="flex w-1/2 flex-col gap-6">
-        <div className="flex flex-col gap-3">
-          <h2 className="text-sm font-semibold text-[#6941C6]">
+    <Flex direction={{ base: 'column', lg: 'row' }} gap={8}>
+      <Box flex={{ base: 'none', lg: 1 / 2 }}>
+        <img src={image} className="h-full w-full object-cover" alt="" />
+      </Box>
+      <Flex direction="column" flex={{ base: 'none', lg: 1 / 2 }} gap={6}>
+        <Stack spacing={3}>
+          <Text fontSize="sm" fontWeight="semibold" color="#6941C6">
             {author} • {date}
-          </h2>
-          <h2 className="text-2xl font-semibold ">{title}</h2>
-          <h2 className="text-sm font-semibold text-[#21D188]">author</h2>
-          <p className="text-base font-normal text-[#667085] ">{brif}</p>
-        </div>
-        <div>
-          <Stack direction="row">
-            <Badge colorScheme="green" className="rounded-full p-1 px-2">
-              Presentation
-            </Badge>
-            <Badge colorScheme="red" className="rounded-full p-1 px-2">
-              Research
-            </Badge>
-            <Badge colorScheme="purple" className="rounded-full p-1 px-2">
-              Design
-            </Badge>
-          </Stack>
-        </div>
-      </div>
-    </div>
+          </Text>
+          <Text fontSize="2xl" fontWeight="semibold">
+            {title}
+          </Text>
+          <Text fontSize="sm" fontWeight="semibold" color="#21D188">
+            {author}
+          </Text>
+          <Text fontSize="base" fontWeight="normal" color="#667085">
+            {brif}
+          </Text>
+        </Stack>
+        <Stack direction="row">
+          <Badge colorScheme="green" rounded="full" p={1} px={2}>
+            Presentation
+          </Badge>
+          <Badge colorScheme="red" rounded="full" p={1} px={2}>
+            Research
+          </Badge>
+          <Badge colorScheme="purple" rounded="full" p={1} px={2}>
+            Design
+          </Badge>
+        </Stack>
+      </Flex>
+    </Flex>
   );
 };
 

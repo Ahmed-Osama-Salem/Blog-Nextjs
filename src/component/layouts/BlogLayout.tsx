@@ -1,3 +1,4 @@
+import { Box, Flex } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
 import Navbar from '../modules/Navbar';
@@ -8,11 +9,12 @@ interface BlogLayoutProps {
 
 const BlogLayout = (props: BlogLayoutProps) => {
   return (
-    <section className="flex w-full flex-col items-center">
-      <div className="w-full max-w-[1280px] ">
-        <Navbar /> {props.children}
-      </div>
-    </section>
+    <Flex direction="column" alignItems="center" w="100%" px="10">
+      <Box maxW="1280px" w="100%">
+        <Navbar />
+        {props.children}
+      </Box>
+    </Flex>
   );
 };
 

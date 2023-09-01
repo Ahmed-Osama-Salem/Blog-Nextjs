@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import type { CreatePostValues } from '../forms/createPostForm';
+
 const getPosts = async () => {
   const postsList = await axios.get(
     'https://jsonplaceholder.typicode.com/posts'
@@ -14,7 +16,7 @@ const fetchPost = async (id: string) => {
   return res.data;
 };
 
-const createNewPost = async (payload: any) => {
+const createNewPost = async (payload: CreatePostValues) => {
   try {
     const res = await axios.post(
       'https://jsonplaceholder.typicode.com/posts',

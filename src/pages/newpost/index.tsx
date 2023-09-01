@@ -7,18 +7,15 @@ import {
   Input,
   Stack,
 } from '@chakra-ui/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Field, Form, Formik } from 'formik';
 import { useMutation, useQueryClient } from 'react-query';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import * as Yup from 'yup';
 
+import { initialValues, validationSchema } from '@/apps/forms/createPostForm';
 import { createNewPost } from '@/apps/server/handleFetchPosts';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
 import { Main } from '@/component/templates/Main';
 
-const initialValues = { blogTitle: '', author: '', blogBody: '' };
 const Index = () => {
   const queryClient = useQueryClient();
 
@@ -33,16 +30,6 @@ const Index = () => {
   });
 
   console.log(mutation);
-
-  const validationSchema = Yup.object().shape({
-    blogTitle: Yup.string()
-      .required('Title is required')
-      .max(100, 'Title must be less than 100 characters'),
-    author: Yup.string().required('Author is required'),
-    blogBody: Yup.string()
-      .required('Content is required')
-      .min(50, 'Content must be more than 50 characters'),
-  });
 
   return (
     <Main meta={<Meta title="New Post" description="create new post" />}>
