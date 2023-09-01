@@ -30,7 +30,7 @@ const HomePage = ({ posts }: { posts: PostProps[] }) => {
   const y = useTransform(scrollYProgress, [0.2, 1.7], [0, -100]);
 
   return (
-    <VStack spacing={14} align="stretch">
+    <VStack spacing={10} align="stretch">
       <Divider />
       <Flex justifyContent="center" align="center">
         <motion.div

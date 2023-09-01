@@ -1,5 +1,6 @@
 import {
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -11,6 +12,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { initialValues, validationSchema } from '@/apps/forms/createPostForm';
@@ -24,6 +26,7 @@ import { Main } from '@/component/templates/Main';
 const Index = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
+  const router = useRouter();
 
   const createPost = async (postData: typeof initialValues) => {
     await createNewPost(postData);
@@ -130,17 +133,40 @@ const Index = () => {
                   </FormControl>
                 )}
               </Field>
-              <Button
-                mt={4}
-                colorScheme="teal"
-                isLoading={mutation.isLoading}
-                type="submit"
-                color="white"
-                variant="solid"
-                style={{ backgroundColor: 'purple' }}
-              >
-                Submit
-              </Button>
+              <Stack spacing={20} align="center" p="10">
+                <Flex
+                  direction={{ base: 'column-reverse', lg: 'row' }}
+                  gap={8}
+                  align="center"
+                  justifyContent="space-between"
+                  w="full"
+                >
+                  <Button
+                    mt={4}
+                    colorScheme="gray"
+                    type="button"
+                    variant="outline"
+                    w="44"
+                    onClick={() => {
+                      router.back();
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    mt={4}
+                    colorScheme="teal"
+                    isLoading={mutation.isLoading}
+                    type="submit"
+                    color="white"
+                    variant="ghost"
+                    style={{ backgroundColor: 'purple' }}
+                    w="44"
+                  >
+                    Publish
+                  </Button>
+                </Flex>
+              </Stack>
             </Form>
           </Formik>
         </Stack>

@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Stack, Text } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 
 interface SecondPostCardProps {
@@ -15,7 +15,7 @@ const SecondPostCard = (props: SecondPostCardProps) => {
   return (
     <Flex direction={{ base: 'column', lg: 'row' }} gap={8}>
       <Box flex={{ base: 'none', lg: 1 / 2 }}>
-        <img src={image} className="h-full w-full object-cover" alt="" />
+        <Image src={image} className="h-full w-full object-cover" alt="" />
       </Box>
       <Flex direction="column" flex={{ base: 'none', lg: 1 / 2 }} gap={6}>
         <Stack spacing={3}>
@@ -28,7 +28,12 @@ const SecondPostCard = (props: SecondPostCardProps) => {
           <Text fontSize="sm" fontWeight="semibold" color="#21D188">
             {author}
           </Text>
-          <Text fontSize="base" fontWeight="normal" color="#667085">
+          <Text
+            fontSize="base"
+            fontWeight="normal"
+            color="#667085"
+            maxW="200px"
+          >
             {brif}
           </Text>
         </Stack>

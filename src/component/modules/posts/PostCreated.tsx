@@ -18,7 +18,7 @@ const PostCreated = ({
 
   return (
     <BlogLayout>
-      <VStack spacing={20} align="center" p="10" maxW="1280" mx="auto">
+      <VStack spacing={20} align="center" p="10">
         <Heading as="h2" fontSize="4xl" fontWeight="semibold">
           Your Post created successfully
         </Heading>
