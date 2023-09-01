@@ -8,14 +8,17 @@ import {
   Stack,
   Textarea,
   useToast,
+  VStack,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { initialValues, validationSchema } from '@/apps/forms/createPostForm';
 import { createNewPost } from '@/apps/server/handleFetchPosts';
+import LoadingSpinner from '@/component/elements/LoadingSpinner';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
+import PostCreated from '@/component/modules/posts/PostCreated';
 import { Main } from '@/component/templates/Main';
 
 const Index = () => {
@@ -50,12 +53,31 @@ const Index = () => {
     },
   });
 
-  console.log(mutation);
+  if (mutation.isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (mutation.isError) {
+    return (
+      <BlogLayout>
+        <VStack spacing={20} align="center" p="10" maxW="1280" mx="auto">
+          <Heading as="h2" fontSize="4xl" fontWeight="semibold">
+            Sorry , we have error accuored right now , please try again
+          </Heading>
+        </VStack>
+      </BlogLayout>
+    );
+  }
+
+  if (mutation.isSuccess) {
+    // console.log(mutation.variables);
+    return <PostCreated mutation={mutation} />;
+  }
 
   return (
     <Main meta={<Meta title="New Post" description="create new post" />}>
       <BlogLayout>
-        <Heading size="md" color="black" fontWeight="bold" fontSize="2xl">
+        <Heading size="lg" fontWeight="bold" fontSize="2xl">
           create new post
         </Heading>
         <Stack py="10">
@@ -73,7 +95,11 @@ const Index = () => {
                     isInvalid={form.errors.blogTitle && form.touched.blogTitle}
                   >
                     <FormLabel>Blog title</FormLabel>
-                    <Input {...field} placeholder="Blog title" />
+                    <Input
+                      {...field}
+                      placeholder="Blog title"
+                      variant="filled"
+                    />
                     <FormErrorMessage>{form.errors.blogTitle}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -84,7 +110,7 @@ const Index = () => {
                     isInvalid={form.errors.author && form.touched.author}
                   >
                     <FormLabel>Author</FormLabel>
-                    <Input {...field} placeholder="Author" />
+                    <Input {...field} placeholder="Author" variant="filled" />
                     <FormErrorMessage>{form.errors.author}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -95,7 +121,11 @@ const Index = () => {
                     isInvalid={form.errors.blogBody && form.touched.blogBody}
                   >
                     <FormLabel>Blog Body</FormLabel>
-                    <Textarea {...field} placeholder="Blog Body" />
+                    <Textarea
+                      {...field}
+                      placeholder="Blog Body"
+                      variant="filled"
+                    />
                     <FormErrorMessage>{form.errors.blogBody}</FormErrorMessage>
                   </FormControl>
                 )}

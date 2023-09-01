@@ -19,6 +19,7 @@ const HomePage = ({ posts }: { posts: PostProps[] }) => {
   const text = 'THE  BLOG';
 
   const cardRef = useRef(null);
+  const headerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -26,12 +27,18 @@ const HomePage = ({ posts }: { posts: PostProps[] }) => {
   });
 
   const opacity = useTransform(scrollYProgress, [0, 1.2], [0.1, 3]);
-  const y = useTransform(scrollYProgress, [0.2, 2.3], [0, -100]);
+  const y = useTransform(scrollYProgress, [0.2, 1.7], [0, -100]);
+
   return (
-    <VStack spacing={8} align="stretch">
+    <VStack spacing={14} align="stretch">
       <Divider />
       <Flex justifyContent="center" align="center">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          ref={headerRef}
+          style={{ y }}
+        >
           <Heading
             as="h1"
             fontSize={{ base: '6xl', md: '8xl', lg: '260px' }}
