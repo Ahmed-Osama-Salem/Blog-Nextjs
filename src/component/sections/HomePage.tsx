@@ -25,8 +25,8 @@ const HomePage = ({ posts }: { posts: PostProps[] }) => {
     offset: ['start end', 'end start'],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.9], [0, 1.5]);
-  const y = useTransform(scrollYProgress, [0, 2.5], [0, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 1.2], [0.1, 3]);
+  const y = useTransform(scrollYProgress, [0.2, 2.3], [0, -100]);
   return (
     <VStack spacing={8} align="stretch">
       <Divider />
