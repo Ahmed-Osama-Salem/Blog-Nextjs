@@ -17,7 +17,6 @@ const ListPostsPage = ({ posts }: { posts: PostProps[] }) => {
           posts.map((post: PostProps, idx) => (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              // animate={{ opacity: 1 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{
@@ -30,7 +29,6 @@ const ListPostsPage = ({ posts }: { posts: PostProps[] }) => {
               key={post.id}
               className="mb-3"
             >
-              {/* <div > */}
               <Link href={`/posts/${post.id}`}>
                 <ListPostCard
                   author="J. K. Rowling"
@@ -41,7 +39,6 @@ const ListPostsPage = ({ posts }: { posts: PostProps[] }) => {
                 />
               </Link>
             </motion.div>
-            // </div>
           ))}
       </SimpleGrid>
     </>

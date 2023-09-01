@@ -7,6 +7,7 @@ import {
   Input,
   Stack,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { useMutation, useQueryClient } from 'react-query';
@@ -19,6 +20,7 @@ import { Main } from '@/component/templates/Main';
 
 const Index = () => {
   const queryClient = useQueryClient();
+  const toast = useToast();
 
   const createPost = async (postData: typeof initialValues) => {
     await createNewPost(postData);
@@ -27,6 +29,24 @@ const Index = () => {
   const mutation = useMutation(createPost, {
     onSuccess: () => {
       queryClient.invalidateQueries('posts');
+      toast({
+        title: 'Post created.',
+        description: "We've created your Post for you.",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+        position: 'top',
+      });
+    },
+    onError: () => {
+      toast({
+        title: 'sorry, we have error',
+        description: "We've an error while creating your Post",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'top',
+      });
     },
   });
 

@@ -25,7 +25,8 @@ const HomePage = ({ posts }: { posts: PostProps[] }) => {
     offset: ['start end', 'end start'],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.9], [0, 1.5]);
+  const y = useTransform(scrollYProgress, [0, 2.5], [0, -100]);
   return (
     <VStack spacing={8} align="stretch">
       <Divider />
@@ -54,9 +55,9 @@ const HomePage = ({ posts }: { posts: PostProps[] }) => {
 
       <VStack spacing={8} align="stretch">
         <Heading as="h2" fontSize="2xl" fontWeight="semibold">
-          All blog posts
+          Recent blog posts
         </Heading>
-        <motion.div ref={cardRef} style={{ opacity }}>
+        <motion.div ref={cardRef} style={{ opacity, y }}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
             <ListPostCard
               author="J. K. Rowling"
