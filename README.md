@@ -10,7 +10,9 @@ The project follows the **Atomic Design pattern**, a methodology for creating de
 
 ## Libraries and Tools Used
 
-- **Tailwind CSS**: Used for writing styles. Tailwind CSS is a utility-first CSS framework that allows for rapid UI development.
+- **Next.js**: Next.js is a React framework used for building server-rendered React applications.
+
+- **TypeScript**: TypeScript is used to provide static typing for JavaScript. This enhances code quality and developer productivity by catching type-related errors early in development.
 
 - **Axios**: Employed for handling HTTP requests. Axios is a popular JavaScript library for making asynchronous HTTP requests to REST APIs.
 
@@ -20,7 +22,11 @@ The project follows the **Atomic Design pattern**, a methodology for creating de
 
 - **Husky**: Integrated for pre-commit hooks. Husky helps ensure code quality by running scripts before commits are made.
 
-- **TypeScript**: TypeScript is used to provide static typing for JavaScript. This enhances code quality and developer productivity by catching type-related errors early in development.
+- **Chakra UI**: Employed for building UI components and theming. Chakra UI is a set of accessible and composable UI components for React.
+
+- **Tailwind CSS**: Used for writing styles. Tailwind CSS is a utility-first CSS framework that allows for rapid UI development.
+
+
 
 ## Setting Up and Running the Project
 
