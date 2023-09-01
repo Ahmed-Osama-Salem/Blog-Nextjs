@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 // eslint-disable-next-line import/no-extraneous-dependencies
 
-import { useQuery } from 'react-query';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import { getPosts } from '@/apps/server/handleFetchPosts';
 import LoadingSpinner from '@/component/elements/LoadingSpinner';
@@ -19,12 +19,12 @@ export interface PostProps {
 }
 
 const Index = () => {
-  const { isSuccess, data, isLoading, isError } = useQuery(
-    ['postsList'],
-    getPosts
-  );
+  const { isSuccess, data, isLoading, isError } = useQuery({
+    queryKey: ['posts'],
+    queryFn: getPosts,
+  });
 
-  // console.log(data, 'client');
+  // console.log(da ta, 'client');
 
   // loading state
   if (isLoading) {
@@ -56,19 +56,19 @@ const Index = () => {
 
 export default Index;
 
-// export async function getStaticProps() {
-//   const queryClient = new QueryClient();
+export async function getStaticProps() {
+  const queryClient = new QueryClient();
 
-//   try {
-//     await queryClient.prefetchQuery(['postsList'], getPosts);
-//   } catch (error) {
-//     console.error('Error prefetching data:', error);
-//   }
+  try {
+    await queryClient.prefetchQuery(['postsList'], getPosts);
+  } catch (error) {
+    console.error('Error prefetching data:', error);
+  }
 
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//     revalidate: 30,
-//   };
-// }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 30,
+  };
+}

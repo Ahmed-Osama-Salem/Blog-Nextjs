@@ -3,10 +3,14 @@ import axios from 'axios';
 import type { CreatePostValues } from '../forms/createPostForm';
 
 const getPosts = async () => {
-  const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-  console.log(res.data, 'res await');
+  try {
+    const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    console.log(res.data, 'res await');
 
-  return res.data;
+    return res.data;
+  } catch (err) {
+    return err;
+  }
 };
 
 const fetchPost = async (id: string) => {

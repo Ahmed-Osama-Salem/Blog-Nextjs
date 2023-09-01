@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 
-import { useQuery } from 'react-query';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import { getPosts } from '@/apps/server/handleFetchPosts';
 import LoadingSpinner from '@/component/elements/LoadingSpinner';
@@ -9,15 +9,11 @@ import { Meta } from '@/component/layouts/Meta';
 import ListPostsPage from '@/component/sections/ListPostsPage';
 import { Main } from '@/component/templates/Main';
 
-import type { PostProps } from '..';
-
 const Index = () => {
-  const {
-    isSuccess,
-    data: postsList = [] as PostProps[],
-    isLoading,
-    isError,
-  } = useQuery(['postsList'], () => getPosts(), {});
+  const { isSuccess, data, isLoading, isError } = useQuery({
+    queryKey: ['posts'],
+    queryFn: getPosts,
+  });
 
   // loading state
   if (isLoading) {
@@ -29,7 +25,7 @@ const Index = () => {
     return (
       <Main meta={<Meta title="All posts" description="list of blogs" />}>
         <BlogLayout>
-          <ListPostsPage posts={postsList} />
+          <ListPostsPage posts={data} />
         </BlogLayout>
       </Main>
     );
@@ -45,14 +41,14 @@ const Index = () => {
 
 export default Index;
 
-// export async function getStaticProps() {
-//   const queryClient = new QueryClient();
+export async function getStaticProps() {
+  const queryClient = new QueryClient();
 
-//   await queryClient.prefetchQuery(['postsList'], () => getPosts());
+  await queryClient.prefetchQuery(['postsList'], () => getPosts());
 
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//   };
-// }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
