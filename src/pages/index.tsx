@@ -2,10 +2,10 @@
 /* eslint-disable react/no-array-index-key */
 // eslint-disable-next-line import/no-extraneous-dependencies
 
-import { Spinner, Stack } from '@chakra-ui/react';
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 
 import { getPosts } from '@/apps/server/handleFetchPosts';
+import LoadingSpinner from '@/component/elements/LoadingSpinner';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
 import HomePage from '@/component/sections/HomePage';
@@ -19,30 +19,20 @@ export interface PostProps {
 }
 
 const Index = () => {
-  const {
-    isSuccess,
-    data: postsList = [],
-    isLoading,
-    isError,
-  } = useQuery(['postsList'], () => getPosts(), {});
+  const { isSuccess, data, isLoading, isError } = useQuery(
+    ['postsList'],
+    getPosts
+  );
+
+  // console.log(data, 'client');
 
   // loading state
   if (isLoading) {
-    return (
-      <Stack>
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Stack>
-    );
+    return <LoadingSpinner />;
   }
 
   // if success load page component
-  if (isSuccess)
+  if (isSuccess) {
     return (
       <Main
         meta={
@@ -50,10 +40,11 @@ const Index = () => {
         }
       >
         <BlogLayout>
-          <HomePage posts={postsList} />
+          <HomePage posts={data} />
         </BlogLayout>
       </Main>
     );
+  }
 
   // if error return error component
   if (isError) {
@@ -65,14 +56,19 @@ const Index = () => {
 
 export default Index;
 
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
+// export async function getStaticProps() {
+//   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['postsList'], () => getPosts());
+//   try {
+//     await queryClient.prefetchQuery(['postsList'], getPosts);
+//   } catch (error) {
+//     console.error('Error prefetching data:', error);
+//   }
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//     revalidate: 30,
+//   };
+// }

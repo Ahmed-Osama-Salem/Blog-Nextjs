@@ -18,23 +18,28 @@ const Navbar = () => {
       <Flex gap={4} mt={{ base: 4, md: 0 }} align="center">
         <Link
           href="/"
-          color={router.pathname === '/' ? 'blue.500' : 'main.900'}
+          color={router.pathname === '/' ? 'blue.500' : 'brand.900'}
           _hover={{ color: 'blue.500' }}
         >
           Home
         </Link>
         <Link
           href="/posts"
-          color={router.pathname === '/posts' ? 'blue.500' : 'main.900'}
+          color={router.pathname === '/posts' ? 'blue.500' : 'brand.900'}
           _hover={{ color: 'blue.500' }}
         >
           Blog
         </Link>
-        <Link href="/newpost">
-          <Button colorScheme="purple" color="main.900">
-            New post
-          </Button>
-        </Link>
+        <Button
+          colorScheme="purple"
+          color="brand.900"
+          variant="solid"
+          onClick={() => {
+            router.push('/newpost');
+          }}
+        >
+          New post
+        </Button>
         <ToggleColorMode />
       </Flex>
     </Flex>

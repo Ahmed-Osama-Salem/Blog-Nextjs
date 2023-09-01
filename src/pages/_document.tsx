@@ -1,7 +1,9 @@
-import { ColorModeScript, theme } from '@chakra-ui/react';
+import { ColorModeScript } from '@chakra-ui/react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 import { AppConfig } from '@/apps/utils/AppConfig';
+
+import { theme } from './_app';
 
 // Need to create a custom _document because i18n support is not compatible with `next export`.
 class MyDocument extends Document {

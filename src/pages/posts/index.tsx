@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 
-import { Spinner, Stack } from '@chakra-ui/react';
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 
 import { getPosts } from '@/apps/server/handleFetchPosts';
+import LoadingSpinner from '@/component/elements/LoadingSpinner';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
 import ListPostsPage from '@/component/sections/ListPostsPage';
@@ -21,21 +21,11 @@ const Index = () => {
 
   // loading state
   if (isLoading) {
-    return (
-      <Stack>
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Stack>
-    );
+    return <LoadingSpinner />;
   }
 
   // if success load page component
-  if (isSuccess)
+  if (isSuccess) {
     return (
       <Main meta={<Meta title="All posts" description="list of blogs" />}>
         <BlogLayout>
@@ -43,6 +33,7 @@ const Index = () => {
         </BlogLayout>
       </Main>
     );
+  }
 
   // if error return error component
   if (isError) {
@@ -54,14 +45,14 @@ const Index = () => {
 
 export default Index;
 
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
+// export async function getStaticProps() {
+//   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['postsList'], () => getPosts());
+//   await queryClient.prefetchQuery(['postsList'], () => getPosts());
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   };
+// }

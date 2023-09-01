@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { Spinner, Stack } from '@chakra-ui/react';
 import type { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import fetchComments from '@/apps/server/handleFetchComments';
 import { fetchPost } from '@/apps/server/handleFetchPosts';
+import LoadingSpinner from '@/component/elements/LoadingSpinner';
 import BlogLayout from '@/component/layouts/BlogLayout';
 import { Meta } from '@/component/layouts/Meta';
 import SinglePostPage from '@/component/sections/SinglePostPage';
@@ -32,21 +32,10 @@ const Posts = () => {
   } = useQuery(['comments', postid], () => fetchComments(postid), {
     enabled: postid.length > 0,
   });
-  console.log(comments, 'comm from query');
 
   // loading state
   if (isLoading || commentsLoading) {
-    return (
-      <Stack>
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Stack>
-    );
+    return <LoadingSpinner />;
   }
 
   if (isSuccess || commentsSuccess) {
