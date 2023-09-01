@@ -24,8 +24,6 @@ const Index = () => {
     queryFn: getPosts,
   });
 
-  // console.log(da ta, 'client');
-
   // loading state
   if (isLoading) {
     return <LoadingSpinner />;
